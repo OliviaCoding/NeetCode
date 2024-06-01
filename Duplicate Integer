@@ -1,0 +1,44 @@
+//Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
+
+class mySolution {
+    public boolean hasDuplicate(int[] nums) {
+        for(int i=0; i<nums.length; i++){
+            for(int j=0; j<nums.length; j++){
+                if(nums[j] == nums[i] && i!=j){
+                return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+}
+
+class Solution {
+    public boolean hasDuplicate(int[] nums) {
+        Set<Integer> uniques = new HashSet<>(); // Step 1
+        for (int i = 0; i < nums.length; i++) { // Step 2
+            if (uniques.contains(nums[i])) { // Step 3
+                return true; // If duplicate is found, return true immediately
+            }
+            uniques.add(nums[i]); // Step 4
+        }
+        return false; // Step 5
+    }
+}
+
+/*参考答案使用了HashSet，这种数据结构的特点是查找和插入操作的时间复杂度都是O(1)，因此可以有效地提高程序的性能。以下是逐步解释代码逻辑：
+
+	1.	声明集合：Set<Integer> uniques = new HashSet<>();
+	•	创建一个HashSet来存储数组中的唯一元素。
+	•	Set接口不能包含重复的元素，利用这一特性来检查数组中是否有重复值。
+	2.	遍历数组：for (int i = 0; i < nums.length; i++)
+	•	使用一个for循环来遍历数组中的每一个元素。
+	3.	检查集合中是否已经包含当前元素：if (uniques.contains(nums[i]))
+	•	使用HashSet的contains方法检查当前元素是否已经在集合中存在。
+	•	如果存在，说明有重复元素，返回true。
+	4.	添加元素到集合中：uniques.add(nums[i])
+	•	如果当前元素不在集合中，则将其添加到集合中。
+	5.	完成遍历后，返回false：return false
+	•	如果遍历完所有元素后，集合中没有发现重复元素，返回false。
+*/
